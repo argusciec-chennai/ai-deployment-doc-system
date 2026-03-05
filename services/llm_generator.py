@@ -37,20 +37,20 @@ def generate_deployment_doc(context, diff):
 	{changes.get("added_functions")}
 
 	Removed Functions:
-	{changes.get("removed_functions")}        
+	{changes.get("removed_functions")}
         CODE DIFF:
         {diff}
 
         GENERATE:
         1. PR Summary
         2. Ticket Information
-        3. Code Changes Summary       
+        3. Code Changes Summary
         4. Impact
         5. Risk level: Low/Medium/High
         6. Deployment notes
-        
 	"""
     print("PROMPT LENGTH:", len(prompt))
+
     payload = {
         "model": "phi3",
         "prompt": prompt,
@@ -70,4 +70,5 @@ def generate_deployment_doc(context, diff):
 
     data = response.json()
     print(response.json())
+
     return data.get("response", "No response generated.")

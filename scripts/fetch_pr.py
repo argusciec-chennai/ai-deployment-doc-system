@@ -104,14 +104,19 @@ def main():
 
     context["code_changes"] = signals
 
+    }
+
+
     print("\n====== STRUCTURED CONTEXT READY FOR LLM ======")
     print(context)
     start = time.time()
+
     clean_diff = "\n".join([
     	line for line in pr_diff.split("\n") if line.startswith("+") or line.startswith("-")])[:500]
     print("Diff size:", len(clean_diff))
     start = time.time() 
     doc = generate_deployment_doc(context, clean_diff)
+
     end = time.time()
     print("\n====== LLM RESPONSE TIME ======")
     print(f"{round(end - start, 2)} seconds")
@@ -119,7 +124,9 @@ def main():
 
     # Create docs directory if it doesn't exist
     os.makedirs(docs_dir, exist_ok=True)
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     file_path = f"{docs_dir}/deployment_pr_{context['pr_number']}_{timestamp}.md"
 
     with open(file_path, "w") as f:
