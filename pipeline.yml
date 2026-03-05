@@ -1,0 +1,51 @@
+resource_types:
+- name: git
+  type: registry-image
+  source:
+    repository: concourse/git-resource
+resources:
+- name: ai-deployment-repo
+  type: git
+  source:
+    uri: https://github.com/argusciec-chennai/ai-deployment-doc-system.git
+    branch: main
+    username: argusciec-chennai
+    password: ((github_token))
+
+jobs:
+- name: generate-deployment-doc
+  plan:
+
+  - get: ai-deployment-repo
+    trigger: true
+
+  - task: run-pr-analyzer
+    privileged: true
+    config:
+      platform: linux
+
+      image_resource:
+        type: registry-image
+        source:
+          repository: python
+          tag: "3.10"
+
+      inputs:
+      - name: ai-deployment-repo
+
+      params:
+        GITHUB_TOKEN: ((github_token))
+        GITHUB_OWNER: ((github_owner))
+        GITHUB_REPO: ((github_repo))
+        OPENPROJECT_URL: ((openproject_url))
+        OPENPROJECT_TOKEN: ((openproject_token))
+        EXPECTED_PROJECT_IDENTIFIER: ((expected_project_identifier))
+
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          cd ai-deployment-repo
+          pip install -r requirements.txt
+          python -m scripts.fetch_pr
