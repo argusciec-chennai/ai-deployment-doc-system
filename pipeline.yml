@@ -9,8 +9,8 @@ resources:
   source:
     uri: https://github.com/argusciec-chennai/ai-deployment-doc-system.git
     branch: main
-    username: argusciec-chennai
-    password: ((github_token))
+    # username: argusciec-chennai
+    # password: ((github_token))
 
 jobs:
 - name: generate-deployment-doc
