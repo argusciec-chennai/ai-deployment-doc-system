@@ -104,8 +104,6 @@ def main():
 
     context["code_changes"] = signals
 
-    }
-
 
     print("\n====== STRUCTURED CONTEXT READY FOR LLM ======")
     print(context)
