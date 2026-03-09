@@ -82,6 +82,9 @@ def resolve_ticket(pr_title, pr_description, branch_name):
     #  Fetch full ticket details
     ticket_details = fetch_ticket_details(ticket)
 
+    print(f"Ticket : {ticket}")
+    print(f"Ticket Details : {ticket_details}")
+
     if not ticket_details:
         return {"status": "UNLINKED"}
 
