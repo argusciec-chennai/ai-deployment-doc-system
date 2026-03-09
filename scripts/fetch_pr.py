@@ -99,7 +99,7 @@ def main():
       "branch": pr_data["head"]["ref"],
       "base": pr_data["base"]["ref"],
       "ticket": ticket_info.get("ticket_details")
-    }  
+    }
     signals = extract_code_signals(pr_diff)
 
     context["code_changes"] = signals
@@ -132,6 +132,9 @@ def main():
 
     print("\n====== DEPLOYMENT DOCUMENT GENERATED ======")
     print(f"Saved to: {file_path}")
+    with open(file_path, "r") as f:
+      for line in f:
+        print(line, end="")
 
 
 

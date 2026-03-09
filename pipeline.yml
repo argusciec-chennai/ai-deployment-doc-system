@@ -40,6 +40,7 @@ jobs:
         OPENPROJECT_URL: ((openproject_url))
         OPENPROJECT_TOKEN: ((openproject_token))
         EXPECTED_PROJECT_IDENTIFIER: ((expected_project_identifier))
+        OLLAMA_URL: ((ollama_url))
 
       run:
         path: sh
